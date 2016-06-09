@@ -7,7 +7,52 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Grid x:Name="TelaPrincipal" Background="White">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <Button x:Name="Favoritos" FontFamily="Segoe MDL2 Assets" Content="&#xE734;" 
+                    Width="50" Height="50" FontSize="25" Foreground="Black" IsTextScaleFactorEnabled="True" 
+                        Background="Transparent" Click="Favoritos_Click" VerticalAlignment="Top" />
+        <Rectangle HorizontalAlignment="Left" Width="30" VerticalAlignment="Top" Margin="0,27" Fill="DarkGray" Height="1" IsTapEnabled="False" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="90"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Button x:Name="List" FontFamily="Segoe MDL2 Assets" Content="&#xE728;" 
+                    Width="50" Height="50" FontSize="25" Foreground="Black" IsTextScaleFactorEnabled="True"                         Background="Transparent" Click="List_Click" VerticalAlignment="Top" />
+        <Rectangle HorizontalAlignment="Left" Width="30" VerticalAlignment="Top" Margin="0,27" Fill="DarkGray" Height="1" IsTapEnabled="False" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="90"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Button x:Name="Speaker" FontFamily="Segoe MDL2 Assets" Content="&#xE767;" 
+                    Width="50" Height="50" FontSize="25" Foreground="Black" Background="Transparent" 
+                    IsTextScaleFactorEnabled="True" Click="Speaker_Click" VerticalAlignment="Top" />
+        <Rectangle HorizontalAlignment="Left" Width="30" VerticalAlignment="Top" Margin="0,27" Fill="DarkGray" Height="1" IsTapEnabled="False" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="90"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Button x:Name="Definiçoes" FontFamily="Segoe MDL2 Assets" Content="&#xE713;" 
+                Width="50" Height="50" FontSize="25" Foreground="Black" Background="Transparent" 
+                        IsTextScaleFactorEnabled="True" Click="Definiçoes_Click" VerticalAlignment="Top" />
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="Frequencia" Foreground="Black" Text="Frequencia" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontSize="55" Margin="20,0"/>
+            <Rectangle HorizontalAlignment="Stretch" Width="auto" VerticalAlignment="Top" Fill="DarkGray" Height="1" IsTapEnabled="False" Visibility="Visible" />
+            <TextBlock x:Name="Nome" Foreground="Black" Text="Nome" HorizontalAlignment="Left" VerticalAlignment="Center"
+                               FontSize="30" Margin="20,0"/>
+            <Rectangle HorizontalAlignment="Stretch" Width="auto" VerticalAlignment="Top" Fill="DarkGray" Height="1" IsTapEnabled="False" Visibility="Visible"/>
+            <TextBlock x:Name="Musica" Foreground="Black" Text="Musica" HorizontalAlignment="Left" VerticalAlignment="Center"
+                               FontSize="30" Margin="20,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="Back" FontFamily="Segoe MDL2 Assets" Content="&#xE892;" FontSize="30" Background="Transparent"
+                            Width="50" Height="50" VerticalAlignment="Bottom" Margin="25,50" Click="Back_Click"/>
+            <Button x:Name="Play" FontFamily="Segoe MDL2 Assets" Content="&#xE768;" FontSize="30" Background="Transparent"
+                            Width="50" Height="50" VerticalAlignment="Bottom" Margin="25,50" Click="Play_Click"/>
+            <Button x:Name="Next" FontFamily="Segoe MDL2 Assets" Content="&#xE893;" FontSize="30" Background="Transparent"
+                            Width="50" Height="50" VerticalAlignment="Bottom" Margin="25,50" Click="Next_Click"/>
+        </StackPanel>
     </Grid>
 </Page>
