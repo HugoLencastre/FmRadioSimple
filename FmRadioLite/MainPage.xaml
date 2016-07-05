@@ -8,34 +8,6 @@
     mc:Ignorable="d">
 
     <Grid x:Name="TelaPrincipal" Background="White">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-        <Button x:Name="Favoritos" FontFamily="Segoe MDL2 Assets" Content="&#xE734;" 
-                    Width="50" Height="50" FontSize="25" Foreground="Black" IsTextScaleFactorEnabled="True" 
-                        Background="Transparent" Click="Favoritos_Click" VerticalAlignment="Top" />
-        <Rectangle HorizontalAlignment="Left" Width="30" VerticalAlignment="Top" Margin="0,27" Fill="DarkGray" Height="1" IsTapEnabled="False" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="90"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Button x:Name="List" FontFamily="Segoe MDL2 Assets" Content="&#xE728;" 
-                    Width="50" Height="50" FontSize="25" Foreground="Black" IsTextScaleFactorEnabled="True"                         Background="Transparent" Click="List_Click" VerticalAlignment="Top" />
-        <Rectangle HorizontalAlignment="Left" Width="30" VerticalAlignment="Top" Margin="0,27" Fill="DarkGray" Height="1" IsTapEnabled="False" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="90"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Button x:Name="Speaker" FontFamily="Segoe MDL2 Assets" Content="&#xE767;" 
-                    Width="50" Height="50" FontSize="25" Foreground="Black" Background="Transparent" 
-                    IsTextScaleFactorEnabled="True" Click="Speaker_Click" VerticalAlignment="Top" />
-        <Rectangle HorizontalAlignment="Left" Width="30" VerticalAlignment="Top" Margin="0,27" Fill="DarkGray" Height="1" IsTapEnabled="False" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="90"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Button x:Name="Definiçoes" FontFamily="Segoe MDL2 Assets" Content="&#xE713;" 
-                Width="50" Height="50" FontSize="25" Foreground="Black" Background="Transparent" 
-                        IsTextScaleFactorEnabled="True" Click="Definiçoes_Click" VerticalAlignment="Top" />
-        </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="Frequencia" Foreground="Black" Text="Frequencia" HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontSize="55" Margin="20,0"/>
@@ -46,13 +18,51 @@
             <TextBlock x:Name="Musica" Foreground="Black" Text="Musica" HorizontalAlignment="Left" VerticalAlignment="Center"
                                FontSize="30" Margin="20,0"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="Back" FontFamily="Segoe MDL2 Assets" Content="&#xE892;" FontSize="30" Background="Transparent"
-                            Width="50" Height="50" VerticalAlignment="Bottom" Margin="25,50" Click="Back_Click"/>
-            <Button x:Name="Play" FontFamily="Segoe MDL2 Assets" Content="&#xE768;" FontSize="30" Background="Transparent"
-                            Width="50" Height="50" VerticalAlignment="Bottom" Margin="25,50" Click="Play_Click"/>
-            <Button x:Name="Next" FontFamily="Segoe MDL2 Assets" Content="&#xE893;" FontSize="30" Background="Transparent"
-                            Width="50" Height="50" VerticalAlignment="Bottom" Margin="25,50" Click="Next_Click"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,40">
+            <Button Background="Transparent" Width="50" Height="50" VerticalAlignment="Bottom" Margin="25,0"
+                            Click="Back_Click">
+                <Button.Content>
+                    <SymbolIcon x:Name="Back" Symbol="Previous"  HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" Foreground="Black" Margin="-10">
+                        <SymbolIcon.RenderTransform>
+                            <CompositeTransform ScaleX="1.6" ScaleY="1.6"/>
+                        </SymbolIcon.RenderTransform>
+                    </SymbolIcon>
+                </Button.Content>
+            </Button>
+            <Button Background="Transparent" Foreground="Black" Width="50" Height="50"
+                            VerticalAlignment="Bottom" Margin="25,0"  Click="Play_Click">
+                <Button.Content>
+                    <SymbolIcon x:Name="Play" Tag="play" Symbol="Play"  HorizontalAlignment="Center" 
+                            VerticalAlignment="Center"  Margin="-10">
+                        <SymbolIcon.RenderTransform>
+                            <CompositeTransform ScaleX="1.6" ScaleY="1.6"/>
+                        </SymbolIcon.RenderTransform>
+                    </SymbolIcon>
+                </Button.Content>
+            </Button>
+            <Button Background="Transparent" Width="50" Height="50" VerticalAlignment="Bottom" Margin="25,0"
+                            Click="Back_Click">
+                <Button.Content>
+                    <SymbolIcon Symbol="Next" HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" Foreground="Black" Margin="-10">
+                        <SymbolIcon.RenderTransform>
+                            <CompositeTransform ScaleX="1.6" ScaleY="1.6"/>
+                        </SymbolIcon.RenderTransform>
+                    </SymbolIcon>
+                </Button.Content>
+            </Button>
         </StackPanel>
+        <CommandBar VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Stretch" IsOpen="False" 
+                    IsSticky="True" >
+            <AppBarButton x:Name="Favoritos" Label="Favoritos" Icon="OutlineStar" Tag="nao"
+                        Foreground="Black" Background="Transparent" Click="Favoritos_Click" />
+            <AppBarButton x:Name="List" Label="Lista" Icon="List" 
+                          Foreground="Black" Background="Transparent" Click="List_Click" />
+            <AppBarButton x:Name="Speaker" Label="Speaker On" Icon="Volume"
+                        Foreground="Black" Background="Transparent"   Click="Speaker_Click" />
+            <AppBarButton x:Name="Definiçoes" Label="Definições" Icon="Setting" 
+                        Foreground="Black" Background="Transparent" Click="Definiçoes_Click" />
+        </CommandBar>
     </Grid>
 </Page>

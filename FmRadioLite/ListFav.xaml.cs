@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -23,56 +24,113 @@ namespace FmRadioLite
     /// </summary>
     public sealed partial class ListFav : Page
     {
-        private List<double> listaRadios { get; set; }
+        private String listaRadios { get; set; }
         private double frequencia { get; set; }
+        private String lang { get; set; }
 
         public ListFav()
         {
             this.InitializeComponent();  
-            frequencia = (double)ApplicationData.Current.LocalSettings.Values["frequencia"];
-            listaRadios = (List<double>)ApplicationData.Current.LocalSettings.Values["listaRadios"];
+            var frequencia = readFile("Freq");
+            var listaRadios = readFile("lista");
+            var lang = readFile("language");
             doLimpa();
             doList();
         }
 
         private void doList()
         {
-            int count = listaRadios.Count();
-            if (count > 0)
+            doTitle(lang);
+            if (listaRadios.Equals(""))
             {
-                foreach (double i in listaRadios)
-                {
-                    count = 1;
-                    doTextBlock(i);
-                }
             }
             else
             {
+                ordena();
                 doTextBlock();
             }
         }
 
-        private void doTextBlock(Double frec)
+        private void ordena()
+        {
+            String result = "";
+            String[] listatemp;
+            listatemp = listaRadios.Split('|');
+            Array.Sort<String>(listatemp);
+            foreach (String freq in listatemp)
+            {
+                result += freq + "|";
+            }
+            listaRadios = result;
+        }
+
+        private void doTitle(String lang)
+        {
+            String texto = "";
+            if (lang.Equals("en") || lang.Equals(""))
+            {
+                texto = "Favourite List: \n";
+            }
+            else if (lang.Equals("pt"))
+            {
+                texto = "Lista de Favoritos: \n";
+            }
+            TextBlock text = new TextBlock();
+            text.Name = "Lista";
+            text.Text = texto;
+
+            Principal.Children.Add(text);
+        }
+
+        private String[] transformStringToArray(String radios)
+        {
+            String[] lista;
+            lista = radios.Split('|');
+            return lista; 
+        }
+
+        private void doTextBlock(String freq)
         {
             TextBlock text = new TextBlock();
-            text.Name = "" + frec + "";
-            text.Text = "" + frec + "";
+            text.Name = freq;
+            text.Text = freq;
 
             Principal.Children.Add(text);
         }
 
         private void doTextBlock()
         {
-            TextBlock text = new TextBlock();
-            text.Name = "Não existem rádios guardadas";
-            text.Text = "Não existem rádios guardadas";
-
-            Principal.Children.Add(text);
+            String[] Lista;
+            Lista = listaRadios.Split('|');
+            foreach (String fre in Lista)
+            {
+                doTextBlock(fre);
+            }
         }
 
         private void doLimpa()
         {
             Principal.Children.Clear();
+        }
+
+        private async System.Threading.Tasks.Task<String> readFile(String name)
+        {
+            Windows.Storage.StorageFolder storageFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sample = await storageFolder.GetFileAsync(name + ".txt");
+
+            string text = await Windows.Storage.FileIO.ReadTextAsync(sample);
+
+            return text;
+        }
+
+        private async void writeFile(String name, String text)
+        {
+            Windows.Storage.StorageFolder storageFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sample = await storageFolder.GetFileAsync(name + ".txt");
+
+            await Windows.Storage.FileIO.WriteTextAsync(sample, text);
         }
 
     }

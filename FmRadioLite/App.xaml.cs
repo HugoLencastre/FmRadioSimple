@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage.Streams;
 
 namespace FmRadioLite
 {
@@ -39,10 +40,59 @@ namespace FmRadioLite
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            localSettings.Values["listaRadio"] = "";
-            localSettings.Values["frequencia"] = 0.0;
-            localSettings.Values["nome"] = "null";
-            localSettings.Values["musica"] = "null";
+            createFile("theme");
+            createFile("listaRadio");
+            createFile("language");
+            createFile("Freq");
+
+            System.Threading.Tasks.Task<String> theme = readFile("theme");
+            System.Threading.Tasks.Task<String> lista = readFile("listaRadio");
+            System.Threading.Tasks.Task<String> lingua = readFile("language");
+            System.Threading.Tasks.Task<String> freq = readFile("Freq");
+
+            if (theme.Equals(""))
+            {
+                writeFile("theme", "Light");
+            }
+            
+            if (lingua.Equals(""))
+            {
+                writeFile("language", "en");
+            }
+            if (freq.Equals(""))
+            {
+                writeFile("Freq", "" + 0 + "");
+            }
+        }
+
+        private async void createFile(String name)
+        {
+            Windows.Storage.StorageFolder storageFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sampleFile =
+                await storageFolder.CreateFileAsync(name+".txt",
+                    Windows.Storage.CreationCollisionOption.OpenIfExists);
+
+        }
+
+        private async System.Threading.Tasks.Task<String> readFile(String name)
+        {
+            Windows.Storage.StorageFolder storageFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sample = await storageFolder.GetFileAsync(name + ".txt");
+
+            string text = await Windows.Storage.FileIO.ReadTextAsync(sample);
+
+            return text;
+        }
+
+        private async void writeFile(String name , String text)
+        {
+            Windows.Storage.StorageFolder storageFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sample = await storageFolder.GetFileAsync(name + ".txt");
+
+            await Windows.Storage.FileIO.WriteTextAsync(sample,text);
         }
 
         /// <summary>
